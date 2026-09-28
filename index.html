@@ -4620,7 +4620,7 @@ function resetCredZone(prefix){
   document.getElementById(prefix+"Thumb").innerHTML = "";
   document.getElementById(prefix+"Input").value = "";
 }
-function openVerifyGate(onSuccess){
+function _doOpenVerifyGate(onSuccess){
   pendingVerifyAction = onSuccess || null;
   credFrenteFile = null; credReversoFile = null;
   credFrenteDataUrl = null; credReversoDataUrl = null;
@@ -4644,6 +4644,20 @@ function openVerifyGate(onSuccess){
     : "Tienes "+tl+" para verificar que eres alumno o se vetará esta cuenta.";
   verifyCredOverlay.classList.add("open");
   registerOverlayOpen("verifycred");
+}
+function openVerifyGate(onSuccess){
+  /* Antes de abrir el flujo de credencial IPN, este dispositivo DEBE tener
+     una clave de acceso (passkey) registrada. Esto garantiza que la cuenta
+     que se cree o recupere quede ligada a un dispositivo identificable, lo
+     cual es el requisito para poder reclamar una cuenta existente (la fase 2
+     de saveCredBtn compara el passkeyId de Firestore con el de este
+     dispositivo). Si aun no tiene passkey, lo mandamos a ese flujo primero;
+     cuando el loginGate termine exitosamente, abre el verificador de credencial. */
+  if(!isUnlocked()){
+    openLoginGate(()=> _doOpenVerifyGate(onSuccess));
+    return;
+  }
+  _doOpenVerifyGate(onSuccess);
 }
 function closeVerifyGate(fromPopstate){
   if(!verifyCredOverlay.classList.contains("open")) return;
