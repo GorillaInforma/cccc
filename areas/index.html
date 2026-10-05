@@ -165,7 +165,11 @@ body{background:#fff}
 .edh{position:sticky;top:0;z-index:2;background:#fff;display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 10px) 0 10px;border-bottom:1px solid #e8eff6}
 #edBack{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid #d5e1ee;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 4px 10px rgba(90,140,200,.18)}
 #edName{flex:1;min-width:0;font:inherit;font-size:1.25rem;font-weight:700;color:var(--ink);border:1px solid #d5e1ee;border-radius:12px;padding:8px 12px;background:#fff}
-.eda{margin:14px 0 6px;padding:12px;border:1px solid #edf2f8;border-radius:16px;box-shadow:0 2px 4px rgba(90,140,200,.10),0 10px 20px -8px rgba(90,140,200,.22)}
+.eda{display:none;margin:14px 0 6px;padding:12px;border:1px solid #edf2f8;border-radius:16px;box-shadow:0 2px 4px rgba(90,140,200,.10),0 10px 20px -8px rgba(90,140,200,.22)}
+.eda.on{display:block}
+#edPlus{width:100%;height:54px;margin:16px 0 0;border:2px dashed #bcd6ee;border-radius:14px;background:#fff;color:var(--acc);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+#edPlus:active{background:#f3f8fd}
+#edCancel{display:block;margin:10px auto 0;border:0;background:none;color:var(--mute);font:inherit;font-size:14px;padding:6px 12px;cursor:pointer}
 .eda label,#edL h3{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--acc);font-weight:700;margin:0 0 6px}
 #edL h3{margin:18px 2px 2px}
 #edNew{width:100%;font:inherit;font-size:16px;border:1px solid #d5e1ee;border-radius:10px;padding:9px 10px;background:#fff;color:var(--ink)}
@@ -201,8 +205,9 @@ body{background:#fff}
 <section id="instV"><h2>Instalar app</h2><img src="icon-192.png" alt=""><p>Instala Áreas en tu pantalla de inicio para abrirla como una app, incluso sin internet.</p><button type="button" id="instB">Instalar</button></section>
 <nav id="nav"><button type="button" class="on" data-v="todos"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Todos</button><button type="button" data-v="hoy"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>Hoy<span class="bdg" id="hoyN">0</span></button><button type="button" data-v="hist"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</button><button type="button" data-v="inst" id="navInst" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Instalar</button></nav>
 <div id="edV"><div class="edh"><button type="button" id="edBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><input id="edName" maxlength="40" autocomplete="off" aria-label="Nombre de la tarjeta"></div>
-<div class="eda"><label>Agregar punto</label><input id="edNew" placeholder="Escribe el punto" autocomplete="off"><div class="row2"><div class="seg"><button type="button" data-t="c" class="on">Con casilla</button><button type="button" data-t="p">Sin casilla</button></div><button type="button" id="edAdd">Agregar</button></div></div>
-<div id="edL"></div></div>
+<div id="edL"></div><button type="button" id="edPlus" aria-label="Agregar punto"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+<div class="eda" id="edA"><label>Agregar punto</label><input id="edNew" placeholder="Escribe el punto" autocomplete="off"><div class="row2"><div class="seg"><button type="button" data-t="c" class="on">Con casilla</button><button type="button" data-t="p">Sin casilla</button></div><button type="button" id="edAdd">Agregar</button></div><button type="button" id="edCancel">Cancelar</button></div>
+</div>
 <div id="cfm"><div class="cbox"><p id="cfmT"></p><div class="row2"><button type="button" id="cfmN">Cancelar</button><button type="button" id="cfmY" class="del">Eliminar</button></div></div></div>
 <div id="toast"></div>
 <div id="bigsm"><svg viewBox="0 0 120 120" width="160" height="160"><circle cx="60" cy="60" r="56" fill="#1f5f8b"/><circle cx="42" cy="48" r="6.5" fill="#fff"/><circle cx="78" cy="48" r="6.5" fill="#fff"/><path d="M36 70Q60 98 84 70" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg></div>
@@ -449,7 +454,7 @@ function lpStart(e,touch){
   if(!ar||e.target.closest(".x"))return;
   var p0=touch?e.touches[0]:e;lpX=p0.clientX;lpY=p0.clientY;
   clearTimeout(lpT);lpClr();
-  lpT=setTimeout(function(){lpT=null;lpF=true;try{navigator.vibrate&&navigator.vibrate(55)}catch(x){}openEditor([].indexOf.call(m.children,ar))},700);
+  lpT=setTimeout(function(){lpT=null;lpF=true;openEditor([].indexOf.call(m.children,ar))},700);
   return}
  /* desde Todos solo se agrega; quitar solo se puede desde Hoy */
  if(!it.closest("#hoyL")&&getPicks().indexOf(it.getAttribute("data-k"))>=0)return;
@@ -577,13 +582,19 @@ function addArea(){
  A.push(["Nueva tarjeta",[],[]]);
  openEditor(A.length-1);edFresh=true;
  try{edName.focus();edName.select()}catch(x){}}
+function showAdd(on){
+ var bx=document.getElementById("edA"),pl=document.getElementById("edPlus");
+ bx.classList.toggle("on",on);pl.style.display=on?"none":"flex";
+ if(on){edType="c";setSeg();edNew.value="";try{bx.scrollIntoView({block:"center"})}catch(x){}edNew.focus()}}
+document.getElementById("edPlus").addEventListener("click",function(){showAdd(true)});
+document.getElementById("edCancel").addEventListener("click",function(){showAdd(false)});
 function setSeg(){document.querySelectorAll(".seg button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")===edType)})}
 function openEditor(ai){
  if(ai<0||!A[ai])return;
  closeCard();edAi=ai;edOpen=true;edFresh=false;edType="c";setSeg();
  edName.value=A[ai][0];edNew.value="";
  document.body.classList.add("lock");edV.classList.add("on");edV.scrollTop=0;
- renderEd();
+ renderEd();showAdd(false);
  try{history.pushState({ed:1},"")}catch(x){}}
 function closeEditor(fromPop){
  if(!edOpen)return;
@@ -614,7 +625,7 @@ function addPt(){
   if(dupC(v,-1,-1)){toast("Ya existe ese punto");return}
   delete S[v];saveS();a[1].push(v)
  }else a[2].push(v);
- saveA();edNew.value="";renderEd();toast("Punto agregado")}
+ saveA();edNew.value="";renderEd();showAdd(false);toast("Punto agregado")}
 document.getElementById("edAdd").addEventListener("click",addPt);
 edNew.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();addPt()}});
 edL.addEventListener("input",function(e){if(e.target.tagName==="TEXTAREA")grow(e.target)});
@@ -656,6 +667,10 @@ edL.addEventListener("click",function(e){
   navigator.serviceWorker.addEventListener("controllerchange",function(){
    if(!had||reloaded)return;reloaded=true;
    if(window.cloudBusy&&window.cloudBusy())return;
+   location.reload()});
+  navigator.serviceWorker.addEventListener("message",function(e){
+   if(e.data!=="updated")return;
+   if((window.cloudBusy&&window.cloudBusy())||window.edOpen)return;
    location.reload()});
   window.addEventListener("load",function(){
    navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(reg){
