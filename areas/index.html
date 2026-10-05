@@ -258,6 +258,22 @@ body{background:#fff}
 .area{position:relative}
 .area .no{position:absolute;top:-1px;left:-1px;margin:0;background:var(--acc);color:#fff;border-radius:20px 0 12px 0;padding:4px 10px 4px 13px}
 .area .hd{padding-top:18px}
+.cnt{cursor:pointer}
+#hoyV,#histV,#dayV{position:relative}
+.allbk{display:none;position:absolute;left:12px;top:10px;z-index:3;width:40px;height:40px;border-radius:50%;border:1px solid #d5e1ee;background:#fff;color:var(--ink);align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 4px 10px rgba(90,140,200,.18)}
+#hoyV.allon>.allbk,#histV.allon>.allbk,#dayV.allon>.allbk{display:flex}
+#hoyV.allon>:not(#hoyH):not(#allV):not(.allbk),#histV.allon>:not(h2):not(#allV):not(.allbk),#dayV.allon>:not(#dayH):not(#allV):not(.allbk){display:none!important}
+#allV h3[data-ai]{cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+#allV h3[data-ai]::after{content:"\203A";font-size:1.3rem;line-height:1;font-weight:600;opacity:.7;padding-right:4px}
+#allV .p.dn .t,#allV .item.dn .t{color:var(--mute);text-decoration:line-through}
+#allV .allE{text-align:center;color:var(--mute);padding:56px 20px}
+/* sin cuadros/selecciones azules al tocar o mantener presionado */
+*,*::before,*::after{-webkit-tap-highlight-color:rgba(0,0,0,0)!important;-webkit-touch-callout:none}
+html,body,body *{-webkit-user-select:none;user-select:none}
+input,textarea{-webkit-user-select:text;user-select:text}
+::selection{background:transparent}
+input::selection,textarea::selection{background:#bcd6ee}
+img{-webkit-user-drag:none;user-drag:none}
 .cnt{margin-left:10px;min-width:30px;height:30px;padding:0 8px;box-sizing:border-box;border-radius:15px;background:#e03131;color:#fff;font-size:14px;font-weight:800;line-height:1;text-shadow:none;text-transform:none;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;position:relative;top:-2px;font-variant-numeric:tabular-nums;box-shadow:0 6px 12px rgba(224,49,49,.30)}
 #todosT{position:relative}
 #todosN{cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -276,9 +292,9 @@ body{background:#fff}
 <h2 id="todosT"><button type="button" id="allBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>Todos<span id="todosN" role="button" aria-label="Ver todos los puntos"></span></h2>
 <main id="m"></main>
 <section id="allV"></section>
-<section id="hoyV"><div id="hoyH"><div><h2>Hoy<span class="cnt" id="hoyBd">0</span></h2><div id="hoyD"></div></div><div id="hoyP"></div></div><div id="bar"><i id="barI"></i></div><div id="hoyL"></div><div id="hoyE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg><b>Aún no hay nada para hoy</b>Mantén presionado un punto en las tarjetas para agregarlo aquí.</div></section>
-<section id="histV"><h2>Historial<span class="cnt" id="histBd">0</span></h2><div id="histL"></div><div id="histE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Aún no hay historial</b>Aquí aparecerán los días en que elegiste puntos para Hoy.</div></section>
-<section id="dayV"><div id="dayH"><div><h2 id="dayT"></h2><div id="dayD"></div></div><div id="dayP"></div></div><div id="dayB"><i id="dayBI"></i></div><div id="dayL"></div><div id="dayE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>Sin puntos este día</b>No hay puntos guardados en esta fecha.</div></section>
+<section id="hoyV"><button type="button" class="allbk" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div id="hoyH"><div><h2>Hoy<span class="cnt" id="hoyBd">0</span></h2><div id="hoyD"></div></div><div id="hoyP"></div></div><div id="bar"><i id="barI"></i></div><div id="hoyL"></div><div id="hoyE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg><b>Aún no hay nada para hoy</b>Mantén presionado un punto en las tarjetas para agregarlo aquí.</div></section>
+<section id="histV"><button type="button" class="allbk" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><h2>Historial<span class="cnt" id="histBd">0</span></h2><div id="histL"></div><div id="histE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Aún no hay historial</b>Aquí aparecerán los días en que elegiste puntos para Hoy.</div></section>
+<section id="dayV"><button type="button" class="allbk" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div id="dayH"><div><h2 id="dayT"></h2><div id="dayD"></div></div><div id="dayP"></div></div><div id="dayB"><i id="dayBI"></i></div><div id="dayL"></div><div id="dayE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>Sin puntos este día</b>No hay puntos guardados en esta fecha.</div></section>
 <section id="instV"><h2>Instalar app</h2><img src="icon-192.png" alt=""><p>Instala Áreas en tu pantalla de inicio para abrirla como una app, incluso sin internet.</p><button type="button" id="instB">Instalar</button></section>
 <nav id="nav"><button type="button" class="on" data-v="todos"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Todos</button><button type="button" data-v="hoy"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>Hoy<span class="bdg" id="hoyN">0</span></button><button type="button" data-v="hist"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</button><button type="button" data-v="day" id="navDay" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg><span id="navDayT"></span></button><button type="button" data-v="inst" id="navInst" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Instalar</button></nav>
 <div id="edV"><div class="edh"><button type="button" id="edBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><input id="edName" maxlength="40" autocomplete="off" aria-label="Nombre de la tarjeta"></div>
@@ -402,6 +418,7 @@ function renderHoy(){
  document.getElementById("hoyL").innerHTML=n?'<div class="col">'+sc+'</div><div class="col">'+sp+'</div>':"";
  document.getElementById("hoyE").style.display=n?"none":"block";
  document.getElementById("hoyBd").textContent=n;
+ if(typeof allOpen!=="undefined"&&allOpen&&allMode==="hoy")allSoft();
  var b=document.getElementById("hoyN");b.textContent=n;b.style.display=n?"flex":"none";
  document.getElementById("hoyD").textContent=new Date().toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"});
  [].forEach.call(document.querySelectorAll("#hoyL .col"),function(c){[].slice.call(c.querySelectorAll(".n"),0,3).forEach(function(e,i){e.classList.add("r"+(i+1))})});
@@ -437,7 +454,7 @@ function renderHist(){
   var dt=new Date(day+"T12:00:00").toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"});
   s+='<div class="hc'+(day===dayCur?" ex":"")+'" data-day="'+day+'"><div class="hch"><span>'+dt+'</span><div class="hr">'+(tot?'<span class="hpill">'+ok+' de '+tot+'</span>':'')+(rows?'':'<span class="hemp">Sin actividad</span>')+((rows||day===td)?'<button type="button" class="hgo" aria-label="'+(day===dayCur?"Cerrar día":"Abrir día")+'">'+(day===dayCur?COL:GO)+'</button>':'')+'</div></div>'+rows+'</div>'});
  document.getElementById("histL").innerHTML=s;
- document.getElementById("histBd").textContent=days.length;
+ var hs={};days.forEach(function(d){((H[d]||{}).p||[]).forEach(function(k){if(KEYS[k]===1)hs[k]=1})});document.getElementById("histBd").textContent=Object.keys(hs).length;
  document.getElementById("histE").style.display=s?"none":"block";
  markHoy();
  if(dayCur&&days.indexOf(dayCur)<0)closeDay()}
@@ -653,8 +670,9 @@ function lpStart(e,touch){
  if(it.classList.contains("hi")){var hc=it.closest(".hc");if(!hc||hc.getAttribute("data-day")===iso())return}
  if(it.classList.contains("hi")&&it.closest("#histL")){var ps=touch?e.touches[0]:e;selStart(it,ps.clientX,ps.clientY);return}
  if(it.closest("#dayL")&&(!dayCur||dayCur===iso()))return;
+ if(it.closest("#allV")&&allMode==="day"&&(!dayCur||dayCur===iso()))return;
  /* desde Todos solo se agrega; quitar solo se puede desde Hoy */
- if(!it.closest("#hoyL")&&getPicks().indexOf(it.getAttribute("data-k"))>=0)return;
+ if(!it.closest("#hoyL")&&!(allOpen&&allMode==="hoy"&&it.closest("#allV"))&&getPicks().indexOf(it.getAttribute("data-k"))>=0)return;
  var pt=touch?e.touches[0]:e;lpX=pt.clientX;lpY=pt.clientY;
  if(it.closest("#hoyL")){hoCancel();hoX0=pt.clientX;hoY0=pt.clientY;hoEl=it;hoT=setTimeout(function(){hoT=null;hoArmGo()},260)}
  clearTimeout(lpT);lpClr();
@@ -664,7 +682,7 @@ function lpStart(e,touch){
   it.classList.toggle("fr",lpX<rc.left+rc.width/2);
   it.classList.toggle("rm",getPicks().indexOf(it.getAttribute("data-k"))>=0);
   it.classList.add("lp")},220);
- lpT=setTimeout(function(){lpT=null;lpF=true;lpClr();try{navigator.vibrate&&navigator.vibrate(55)}catch(x){}if(it.closest("#histL,#dayL"))sendHoy(it.getAttribute("data-k"));else togglePick(it);},1500)}
+ lpT=setTimeout(function(){lpT=null;lpF=true;lpClr();try{navigator.vibrate&&navigator.vibrate(55)}catch(x){}if(it.closest("#histL,#dayL")||(it.closest("#allV")&&(allMode==="day"||allMode==="hist")))sendHoy(it.getAttribute("data-k"));else togglePick(it);},1500)}
 function lpCancel(touch){if(touch)lastTouch=Date.now();clearTimeout(lpT);lpT=null;lpClr()}
 function lpMove(e,touch){
  if(lpT===null)return;
@@ -910,6 +928,8 @@ function dayRoll(){
 document.addEventListener("visibilitychange",function(){if(!document.hidden){renderHoy();dayRoll()}});
 window.addEventListener("focus",dayRoll);
 setInterval(dayRoll,30000);
+document.addEventListener("selectstart",function(e){var t=e.target&&e.target.nodeType===1?e.target:e.target&&e.target.parentElement;if(t&&t.closest&&t.closest("input,textarea"))return;e.preventDefault()});
+document.addEventListener("contextmenu",function(e){if(e.target.closest&&e.target.closest("input,textarea"))return;e.preventDefault()});
 /* ===== Botón atrás del teléfono: siempre regresa un paso y nunca cierra la app ===== */
 var guardOn=false;
 function ensureGuard(){
@@ -932,34 +952,80 @@ window.addEventListener("popstate",function(){
  if(s&&!s.root)return;
  backStep();
  try{history.pushState({app:1},"")}catch(x){}},true);
-/* ===== Lista plana de todos los puntos (bolita roja junto a "Todos") ===== */
-var allOpen=false,skipAll=false,allV=document.getElementById("allV"),todosT=document.getElementById("todosT");
+/* ===== Lista plana de puntos (bolita roja de cada sección) ===== */
+var allOpen=false,allMode="todos",skipAll=false,allV=document.getElementById("allV"),todosT=document.getElementById("todosT");
+var ALLC={hoy:"hoyV",hist:"histV",day:"dayV"};
 function renderAll(){
+ var mode=allMode,set=null,H=getH(),o=null,pd=[],dd=[],ord=getOrd();
+ if(mode==="hoy"){set=getPicks();pd=getPD()}
+ else if(mode==="day"){o=H[dayCur]||{p:[],d:[],pd:[]};set=o.p||[];dd=o.d||[];pd=o.pd||[]}
+ else if(mode==="hist"){set=[];histDays(H).forEach(function(d){((H[d]||{}).p||[]).forEach(function(k){if(set.indexOf(k)<0)set.push(k)})})}
+ function rk(k){var i=ord.indexOf(k);return i<0?1e6:i}
+ function pass(k){return set===null||set.indexOf(k)>=0}
  var h="";
  A.forEach(function(a,ai){
-  h+="<h3>"+esc(a[0])+"</h3>";var n=0;
-  a[2].forEach(function(t,j){n++;h+='<div class="p" data-k="p'+ai+'_'+j+'">'+num(n)+'<span class="t">'+esc(t)+'</span></div>'});
-  a[1].forEach(function(t,j){n++;h+=row(t,n,false,"c"+ai+"_"+j)})});
- allV.innerHTML=h}
-function openAll(){
+  var rows="",n=0,ps=[],cs=[];
+  a[2].forEach(function(t,j){var k="p"+ai+"_"+j;if(pass(k))ps.push({k:k,t:t})});
+  a[1].forEach(function(t,j){var k="c"+ai+"_"+j;if(pass(k))cs.push({k:k,t:t})});
+  if(mode==="hoy"){var cmp=function(x,y){return rk(x.k)-rk(y.k)};ps.sort(cmp);cs.sort(cmp)}
+  ps.forEach(function(x){n++;var dn=(mode==="hoy"||mode==="day")&&pd.indexOf(x.k)>=0;rows+='<div class="p'+(dn?" dn":"")+'" data-k="'+x.k+'">'+num(n)+'<span class="t">'+esc(x.t)+'</span></div>'});
+  cs.forEach(function(x){n++;
+   if(mode==="todos"||mode==="hoy")rows+=row(x.t,n,false,x.k);
+   else if(mode==="day"){var dn=dd.indexOf(x.k)>=0;rows+='<div class="item'+(dn?" dn":"")+'" data-k="'+x.k+'">'+num(n)+'<input type="checkbox" tabindex="-1"'+(dn?" checked":"")+'><span class="t">'+esc(x.t)+'</span></div>'}
+   else rows+='<div class="p" data-k="'+x.k+'">'+num(n)+'<span class="t">'+esc(x.t)+'</span></div>'});
+  if(rows)h+='<h3 data-ai="'+ai+'">'+esc(a[0])+'</h3>'+rows});
+ allV.innerHTML=h||'<div class="allE">Sin puntos</div>'}
+function openAll(mode){
  if(allOpen)return;
- closeCard();renderAll();allOpen=true;
- m.style.display="none";allV.style.display="block";todosT.classList.add("allon");
+ mode=mode||"todos";
+ closeCard();allMode=mode;renderAll();allOpen=true;
+ if(mode==="todos"){m.style.display="none";todosT.classList.add("allon")}
+ else{var c=document.getElementById(ALLC[mode]);c.appendChild(allV);c.classList.add("allon")}
+ allV.style.display="block";
  window.scrollTo(0,0);
  ensureGuard();try{history.pushState({all:1},"")}catch(x){}}
 function closeAll(fromPop){
  if(!allOpen)return;
- allOpen=false;allV.style.display="none";m.style.display="";todosT.classList.remove("allon");
+ var mode=allMode;allOpen=false;allV.style.display="none";
+ if(mode==="todos"){m.style.display="";todosT.classList.remove("allon")}
+ else{var c=document.getElementById(ALLC[mode]);c.classList.remove("allon");document.body.insertBefore(allV,m.nextSibling);
+  if(mode==="hoy")renderHoy();else if(mode==="day"&&dayCur)renderDay();else if(mode==="hist")renderHist()}
  window.scrollTo(0,0);
  if(!fromPop&&history.state&&history.state.all){skipAll=true;try{history.back()}catch(x){}}}
-document.getElementById("todosN").addEventListener("click",function(e){e.stopPropagation();if(allOpen)closeAll(false);else openAll()});
+/* al quitar un punto de Hoy desde la lista no se reemplaza el DOM bajo el dedo: se oculta y se redibuja al soltar */
+var allDirty=false,allDT=null;
+function allSoft(){
+ var pk=getPicks();
+ [].forEach.call(allV.querySelectorAll("[data-k]"),function(e){if(pk.indexOf(e.getAttribute("data-k"))<0)e.style.display="none"});
+ allDirty=true}
+["touchend","touchcancel","mouseup"].forEach(function(n){document.addEventListener(n,function(){
+ if(!allDirty)return;clearTimeout(allDT);
+ allDT=setTimeout(function(){if(allDirty&&allOpen&&allMode==="hoy"){allDirty=false;renderAll()}},450)},true)});
+function toggleAll(mode){if(allOpen)closeAll(false);else openAll(mode)}
+document.getElementById("todosN").addEventListener("click",function(e){e.stopPropagation();toggleAll("todos")});
+document.getElementById("hoyBd").addEventListener("click",function(e){e.stopPropagation();toggleAll("hoy")});
+document.getElementById("histBd").addEventListener("click",function(e){e.stopPropagation();toggleAll("hist")});
+document.getElementById("dayT").addEventListener("click",function(e){if(e.target.closest(".cnt")){e.stopPropagation();toggleAll("day")}});
 document.getElementById("allBack").addEventListener("click",function(){closeAll(false)});
-window.addEventListener("popstate",function(){if(skipAll){skipAll=false;return}if(allOpen)closeAll(true)});
+document.querySelectorAll(".allbk").forEach(function(b){b.addEventListener("click",function(){closeAll(false)})});
+window.addEventListener("popstate",function(){if(skipAll){skipAll=false;return}if(allOpen&&!edOpen)closeAll(true)});
 try{if(history.state&&history.state.all)history.replaceState(null,"")}catch(x){}
 allV.addEventListener("click",function(e){
- if(e.target.tagName==="INPUT")return;
- var it=e.target.closest(".item");
- if(it){var cb=it.querySelector("input");if(cb)cb.click()}});
+ var h3=e.target.closest("h3[data-ai]");
+ if(h3){openEditor(+h3.getAttribute("data-ai"));return}
+ var it=e.target.closest(".item,.p");if(!it)return;
+ var k=it.getAttribute("data-k");
+ if(allMode==="day"){
+  if(!dayCur||dayCur===iso())return;
+  var on=!it.classList.contains("dn");daySet(dayCur,k,on);it.classList.toggle("dn",on);
+  var cb=it.querySelector("input");if(cb)cb.checked=on;updDay();return}
+ if(allMode==="hist")return;
+ if(it.classList.contains("item")){
+  if(e.target.tagName==="INPUT")return;
+  var c2=it.querySelector("input");if(c2)c2.click();return}
+ if(allMode==="hoy"){
+  var d=getPD(),i=d.indexOf(k);if(i>=0)d.splice(i,1);else d.push(k);
+  setPD(d);it.classList.toggle("dn",i<0);saveHist()}});
 /* ===== Editor de tarjeta ===== */
 var edOpen=false,edFresh=false,edAi=0,edType="c",skipEd=false;
 var edV=document.getElementById("edV"),edL=document.getElementById("edL"),edName=document.getElementById("edName"),edNew=document.getElementById("edNew");
