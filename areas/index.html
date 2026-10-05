@@ -258,14 +258,26 @@ body{background:#fff}
 .area{position:relative}
 .area .no{position:absolute;top:-1px;left:-1px;margin:0;background:var(--acc);color:#fff;border-radius:20px 0 12px 0;padding:4px 10px 4px 13px}
 .area .hd{padding-top:18px}
+.cnt{margin-left:10px;min-width:30px;height:30px;padding:0 8px;box-sizing:border-box;border-radius:15px;background:#e03131;color:#fff;font-size:14px;font-weight:800;line-height:1;text-shadow:none;text-transform:none;display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;position:relative;top:-2px;font-variant-numeric:tabular-nums;box-shadow:0 6px 12px rgba(224,49,49,.30)}
+#todosT{position:relative}
+#todosN{cursor:pointer;-webkit-tap-highlight-color:transparent}
+#todosT.allon #todosN{box-shadow:0 0 0 3px rgba(224,49,49,.28),0 6px 12px rgba(224,49,49,.30)}
+#allBack{display:none;position:absolute;left:12px;top:calc(50% + 3px);transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid #d5e1ee;background:#fff;color:var(--ink);align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 4px 10px rgba(90,140,200,.18)}
+#todosT.allon #allBack{display:flex}
+#allV{display:none;padding:0 14px calc(var(--bot) + 16px)}
+#allV h3{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;color:var(--acc);font-weight:700;margin:20px 0 2px;padding-left:2px}
+#allV h3:first-child{margin-top:8px}
+#allV .item,#allV .p{width:100%;box-sizing:border-box;padding:10px 2px;gap:12px}
+#allV .t{display:block;-webkit-line-clamp:unset;overflow:visible;font-size:15px}
 #todosN{margin-left:10px;min-width:30px;height:30px;padding:0 8px;box-sizing:border-box;border-radius:15px;background:#e03131;color:#fff;font-size:14px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;box-shadow:0 6px 12px rgba(224,49,49,.30)}
 </style>
 </head>
 <body>
-<h2 id="todosT">Todos<span id="todosN"></span></h2>
+<h2 id="todosT"><button type="button" id="allBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>Todos<span id="todosN" role="button" aria-label="Ver todos los puntos"></span></h2>
 <main id="m"></main>
-<section id="hoyV"><div id="hoyH"><div><h2>Hoy</h2><div id="hoyD"></div></div><div id="hoyP"></div></div><div id="bar"><i id="barI"></i></div><div id="hoyL"></div><div id="hoyE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg><b>Aún no hay nada para hoy</b>Mantén presionado un punto en las tarjetas para agregarlo aquí.</div></section>
-<section id="histV"><h2>Historial</h2><div id="histL"></div><div id="histE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Aún no hay historial</b>Aquí aparecerán los días en que elegiste puntos para Hoy.</div></section>
+<section id="allV"></section>
+<section id="hoyV"><div id="hoyH"><div><h2>Hoy<span class="cnt" id="hoyBd">0</span></h2><div id="hoyD"></div></div><div id="hoyP"></div></div><div id="bar"><i id="barI"></i></div><div id="hoyL"></div><div id="hoyE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg><b>Aún no hay nada para hoy</b>Mantén presionado un punto en las tarjetas para agregarlo aquí.</div></section>
+<section id="histV"><h2>Historial<span class="cnt" id="histBd">0</span></h2><div id="histL"></div><div id="histE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Aún no hay historial</b>Aquí aparecerán los días en que elegiste puntos para Hoy.</div></section>
 <section id="dayV"><div id="dayH"><div><h2 id="dayT"></h2><div id="dayD"></div></div><div id="dayP"></div></div><div id="dayB"><i id="dayBI"></i></div><div id="dayL"></div><div id="dayE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><b>Sin puntos este día</b>No hay puntos guardados en esta fecha.</div></section>
 <section id="instV"><h2>Instalar app</h2><img src="icon-192.png" alt=""><p>Instala Áreas en tu pantalla de inicio para abrirla como una app, incluso sin internet.</p><button type="button" id="instB">Instalar</button></section>
 <nav id="nav"><button type="button" class="on" data-v="todos"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Todos</button><button type="button" data-v="hoy"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>Hoy<span class="bdg" id="hoyN">0</span></button><button type="button" data-v="hist"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</button><button type="button" data-v="day" id="navDay" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg><span id="navDayT"></span></button><button type="button" data-v="inst" id="navInst" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Instalar</button></nav>
@@ -361,7 +373,7 @@ function fit(root){
     el.style.fontSize=z+"px";
     if(ok(el)){done=true;return}}});
   if(!done){el.style.webkitLineClamp=3;el.style.fontSize=MIN+"px"}})}
-var view="todos",tT=null;
+var view="todos",tT=null,viewStack=[];
 function toast(t){var e=document.getElementById("toast");e.textContent=t;e.classList.add("show");clearTimeout(tT);tT=setTimeout(function(){e.classList.remove("show")},1400)}
 function updProg(){
  var p=getPicks(),tot=0,ok=0;
@@ -389,6 +401,7 @@ function renderHoy(){
  var n=nc+np;
  document.getElementById("hoyL").innerHTML=n?'<div class="col">'+sc+'</div><div class="col">'+sp+'</div>':"";
  document.getElementById("hoyE").style.display=n?"none":"block";
+ document.getElementById("hoyBd").textContent=n;
  var b=document.getElementById("hoyN");b.textContent=n;b.style.display=n?"flex":"none";
  document.getElementById("hoyD").textContent=new Date().toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"});
  [].forEach.call(document.querySelectorAll("#hoyL .col"),function(c){[].slice.call(c.querySelectorAll(".n"),0,3).forEach(function(e,i){e.classList.add("r"+(i+1))})});
@@ -424,6 +437,7 @@ function renderHist(){
   var dt=new Date(day+"T12:00:00").toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"});
   s+='<div class="hc'+(day===dayCur?" ex":"")+'" data-day="'+day+'"><div class="hch"><span>'+dt+'</span><div class="hr">'+(tot?'<span class="hpill">'+ok+' de '+tot+'</span>':'')+(rows?'':'<span class="hemp">Sin actividad</span>')+((rows||day===td)?'<button type="button" class="hgo" aria-label="'+(day===dayCur?"Cerrar día":"Abrir día")+'">'+(day===dayCur?COL:GO)+'</button>':'')+'</div></div>'+rows+'</div>'});
  document.getElementById("histL").innerHTML=s;
+ document.getElementById("histBd").textContent=days.length;
  document.getElementById("histE").style.display=s?"none":"block";
  markHoy();
  if(dayCur&&days.indexOf(dayCur)<0)closeDay()}
@@ -486,7 +500,7 @@ function renderDay(){
  document.getElementById("dayL").innerHTML=n?'<div class="col">'+sc+'</div><div class="col">'+sp+'</div>':"";
  document.getElementById("dayE").style.display=n?"none":"block";
  var dt=new Date(dayCur+"T12:00:00");
- document.getElementById("dayT").textContent=dt.toLocaleDateString("es-MX",{weekday:"long"});
+ document.getElementById("dayT").innerHTML=esc(dt.toLocaleDateString("es-MX",{weekday:"long"}))+'<span class="cnt">'+n+'</span>';
  document.getElementById("dayD").textContent=dt.toLocaleDateString("es-MX",{day:"numeric",month:"long",year:"numeric"});
  updDay();markHoy();
  if(view==="day")fit(document.getElementById("dayV"))}
@@ -543,7 +557,9 @@ function sendMany(keys){
  toast(n===1?"1 punto agregado a Hoy":n+" puntos agregados a Hoy");bigOk()}
 function setView(v){
  if(v===view)return;
+ if(typeof allOpen!=="undefined"&&allOpen)closeAll(false);
  selClear();
+ if(viewStack.length&&viewStack[viewStack.length-1]===v)viewStack.pop();else{viewStack.push(view);if(viewStack.length>30)viewStack.shift()}
  closeCard();document.querySelectorAll("#histL .hc.open").forEach(function(x){x.classList.remove("open")});
  view=v;
  m.style.display=v==="todos"?"":"none";
@@ -894,6 +910,56 @@ function dayRoll(){
 document.addEventListener("visibilitychange",function(){if(!document.hidden){renderHoy();dayRoll()}});
 window.addEventListener("focus",dayRoll);
 setInterval(dayRoll,30000);
+/* ===== Botón atrás del teléfono: siempre regresa un paso y nunca cierra la app ===== */
+var guardOn=false;
+function ensureGuard(){
+ if(guardOn)return;guardOn=true;
+ try{history.replaceState({root:1},"");history.pushState({app:1},"")}catch(x){}}
+try{var gs=history.state;if(gs&&(gs.app||gs.root||gs.ed||gs.all))guardOn=true}catch(x){}
+["click","touchend","keydown"].forEach(function(n){document.addEventListener(n,ensureGuard,{once:true,passive:true})});
+function backStep(){
+ if(document.getElementById("cfm").classList.contains("on")){cfmCancel();return}
+ if(typeof selOn!=="undefined"&&selOn){selClear();return}
+ if(edOpen){closeEditor(true);return}
+ if(allOpen){closeAll(true);return}
+ if(cur){closeCard();return}
+ while(viewStack.length){
+  var t=viewStack[viewStack.length-1];
+  if(t===view||t==="inst"||(t==="day"&&!dayCur)){viewStack.pop();continue}
+  setView(t);return}}
+window.addEventListener("popstate",function(){
+ var s=history.state;
+ if(s&&!s.root)return;
+ backStep();
+ try{history.pushState({app:1},"")}catch(x){}},true);
+/* ===== Lista plana de todos los puntos (bolita roja junto a "Todos") ===== */
+var allOpen=false,skipAll=false,allV=document.getElementById("allV"),todosT=document.getElementById("todosT");
+function renderAll(){
+ var h="";
+ A.forEach(function(a,ai){
+  h+="<h3>"+esc(a[0])+"</h3>";var n=0;
+  a[2].forEach(function(t,j){n++;h+='<div class="p" data-k="p'+ai+'_'+j+'">'+num(n)+'<span class="t">'+esc(t)+'</span></div>'});
+  a[1].forEach(function(t,j){n++;h+=row(t,n,false,"c"+ai+"_"+j)})});
+ allV.innerHTML=h}
+function openAll(){
+ if(allOpen)return;
+ closeCard();renderAll();allOpen=true;
+ m.style.display="none";allV.style.display="block";todosT.classList.add("allon");
+ window.scrollTo(0,0);
+ ensureGuard();try{history.pushState({all:1},"")}catch(x){}}
+function closeAll(fromPop){
+ if(!allOpen)return;
+ allOpen=false;allV.style.display="none";m.style.display="";todosT.classList.remove("allon");
+ window.scrollTo(0,0);
+ if(!fromPop&&history.state&&history.state.all){skipAll=true;try{history.back()}catch(x){}}}
+document.getElementById("todosN").addEventListener("click",function(e){e.stopPropagation();if(allOpen)closeAll(false);else openAll()});
+document.getElementById("allBack").addEventListener("click",function(){closeAll(false)});
+window.addEventListener("popstate",function(){if(skipAll){skipAll=false;return}if(allOpen)closeAll(true)});
+try{if(history.state&&history.state.all)history.replaceState(null,"")}catch(x){}
+allV.addEventListener("click",function(e){
+ if(e.target.tagName==="INPUT")return;
+ var it=e.target.closest(".item");
+ if(it){var cb=it.querySelector("input");if(cb)cb.click()}});
 /* ===== Editor de tarjeta ===== */
 var edOpen=false,edFresh=false,edAi=0,edType="c",skipEd=false;
 var edV=document.getElementById("edV"),edL=document.getElementById("edL"),edName=document.getElementById("edName"),edNew=document.getElementById("edNew");
@@ -901,7 +967,7 @@ var IC='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1f7
 var IP='<svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="3.5" fill="#6a7786"/></svg>';
 var TR='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#e0212f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>';
 function saveA(){ST.setItem("areas-data",JSON.stringify(A))}
-function refreshAll(){closeCard();build();updPies();fit(m);renderHoy();if(view==="hist")renderHist();if(view==="day")renderDay()}
+function refreshAll(){closeCard();build();updPies();fit(m);if(allOpen)renderAll();renderHoy();if(view==="hist")renderHist();if(view==="day")renderDay()}
 function reloadData(){
  try{S=JSON.parse(ST.getItem(KEY)||"{}")}catch(e){S={}}
  var sa=null;try{sa=JSON.parse(ST.getItem("areas-data")||"null")}catch(e){}
@@ -949,7 +1015,7 @@ function openEditor(ai){
  edName.value=A[ai][0];edNew.value="";
  document.body.classList.add("lock");edV.classList.add("on");edV.scrollTop=0;
  renderEd();showAdd(false);
- try{history.pushState({ed:1},"")}catch(x){}}
+ ensureGuard();try{history.pushState({ed:1},"")}catch(x){}}
 function closeEditor(fromPop){
  if(!edOpen)return;
  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
@@ -968,8 +1034,25 @@ document.getElementById("cfmY").addEventListener("click",function(){var f=cfmCb;
 document.getElementById("cfm").addEventListener("click",function(e){if(e.target.id==="cfm")cfmCancel()});
 document.getElementById("edBack").addEventListener("click",function(){closeEditor(false)});
 window.addEventListener("popstate",function(){if(skipEd){skipEd=false;return}if(edOpen)closeEditor(true)});
+function remapAreaDel(ai){
+ function f(k){var q=/^([cp])(\d+)_(\d+)$/.exec(k);if(!q)return k;var n=+q[2];if(n===ai)return null;return n>ai?q[1]+(n-1)+"_"+q[3]:k}
+ function g(a){return Array.isArray(a)?a.map(f).filter(function(x){return x!==null}):a}
+ [[HK,"p"],[PK,"k"],[OK2,"o"],[FK,"k"]].forEach(function(z){var o=readJ(z[0]);if(o[z[1]]){o[z[1]]=g(o[z[1]]);ST.setItem(z[0],JSON.stringify(o))}});
+ var H=getH();
+ Object.keys(H).forEach(function(d){var x=H[d];x.p=g(x.p||[]);x.d=g(x.d||[]);x.pd=g(x.pd||[])});
+ saveH(H)}
+/* si borras la última letra del título y la tarjeta no tiene puntos, se elimina y sales */
+edName.addEventListener("input",function(){
+ if(edName.value.trim()!=="")return;
+ var a=A[edAi];
+ if(!a||a[1].length||a[2].some(function(x){return x!==""}))return;
+ var ai=edAi;
+ A.splice(ai,1);remapAreaDel(ai);saveA();
+ edAi=-1;edFresh=false;
+ closeEditor(false);toast("Tarjeta eliminada")});
 edName.addEventListener("change",function(){
  var v=edName.value.replace(/\s+/g," ").trim();
+ if(!A[edAi])return;
  if(!v){edName.value=A[edAi][0];return}
  A[edAi][0]=v;edName.value=v;saveA()});
 edName.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();edName.blur()}});
