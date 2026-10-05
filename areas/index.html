@@ -298,7 +298,7 @@ img{-webkit-user-drag:none;user-drag:none}
 <section id="instV"><h2>Instalar app</h2><img src="icon-192.png" alt=""><p>Instala Áreas en tu pantalla de inicio para abrirla como una app, incluso sin internet.</p><button type="button" id="instB">Instalar</button></section>
 <nav id="nav"><button type="button" class="on" data-v="todos"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Todos</button><button type="button" data-v="hoy"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>Hoy<span class="bdg" id="hoyN">0</span></button><button type="button" data-v="hist"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</button><button type="button" data-v="day" id="navDay" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg><span id="navDayT"></span></button><button type="button" data-v="inst" id="navInst" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Instalar</button></nav>
 <div id="edV"><div class="edh"><button type="button" id="edBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><input id="edName" maxlength="40" autocomplete="off" aria-label="Nombre de la tarjeta"></div>
-<div id="edL"></div><button type="button" id="edPlus" aria-label="Agregar punto"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+<div id="edL"></div>
 <div class="eda" id="edA"><label>Agregar punto</label><input id="edNew" placeholder="Escribe el punto" autocomplete="off"><div class="row2"><div class="seg"><button type="button" data-t="c" class="on">Con casilla</button><button type="button" data-t="p">Sin casilla</button></div><button type="button" id="edAdd">Agregar</button></div><button type="button" id="edCancel">Cancelar</button></div>
 </div>
 <div id="cfm"><div class="cbox"><p id="cfmT"></p><div class="row2"><button type="button" id="cfmN">Cancelar</button><button type="button" id="cfmY" class="del">Eliminar</button></div></div></div>
@@ -454,7 +454,7 @@ function renderHist(){
   var dt=new Date(day+"T12:00:00").toLocaleDateString("es-MX",{weekday:"long",day:"numeric",month:"long"});
   s+='<div class="hc'+(day===dayCur?" ex":"")+'" data-day="'+day+'"><div class="hch"><span>'+dt+'</span><div class="hr">'+(tot?'<span class="hpill">'+ok+' de '+tot+'</span>':'')+(rows?'':'<span class="hemp">Sin actividad</span>')+((rows||day===td)?'<button type="button" class="hgo" aria-label="'+(day===dayCur?"Cerrar día":"Abrir día")+'">'+(day===dayCur?COL:GO)+'</button>':'')+'</div></div>'+rows+'</div>'});
  document.getElementById("histL").innerHTML=s;
- var hs={};days.forEach(function(d){((H[d]||{}).p||[]).forEach(function(k){if(KEYS[k]===1)hs[k]=1})});document.getElementById("histBd").textContent=Object.keys(hs).length;
+ document.getElementById("histBd").textContent=days.length;
  document.getElementById("histE").style.display=s?"none":"block";
  markHoy();
  if(dayCur&&days.indexOf(dayCur)<0)closeDay()}
@@ -1061,7 +1061,8 @@ function renderEd(){
   list.forEach(function(t,j){r+='<div class="edr" data-t="'+type+'" data-j="'+j+'"><span class="edk">'+(type==="c"?IC:IP)+'</span><textarea rows="1" spellcheck="false">'+esc(t)+'</textarea><button type="button" class="edd" aria-label="Eliminar">'+TR+'</button></div>'});
   return r}
  var PL='<button type="button" class="edp1" aria-label="Agregar punto sin casilla"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>';
- var html=rows(a[2],"p","Sin casilla",true)+PL+rows(a[1],"c","Con casilla");
+ var PC=PL.replace('class="edp1"','class="edp1 edpc"').replace("sin casilla","con casilla");
+ var html=rows(a[2],"p","Sin casilla",true)+PL+rows(a[1],"c","Con casilla",true)+PC;
  edL.innerHTML=html;
  edL.querySelectorAll("textarea").forEach(grow)}
 function addArea(){
@@ -1069,10 +1070,9 @@ function addArea(){
  openEditor(A.length-1);edFresh=true;
  try{edName.focus();edName.select()}catch(x){}}
 function showAdd(on){
- var bx=document.getElementById("edA"),pl=document.getElementById("edPlus");
- bx.classList.toggle("on",on);pl.style.display=on?"none":"flex";
+ var bx=document.getElementById("edA");
+ bx.classList.toggle("on",on);
  if(on){edType="c";setSeg();edNew.value="";try{bx.scrollIntoView({block:"center"})}catch(x){}edNew.focus()}}
-document.getElementById("edPlus").addEventListener("click",function(){showAdd(true)});
 document.getElementById("edCancel").addEventListener("click",function(){showAdd(false)});
 function setSeg(){document.querySelectorAll(".seg button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")===edType)})}
 function openEditor(ai){
@@ -1085,7 +1085,7 @@ function openEditor(ai){
 function closeEditor(fromPop){
  if(!edOpen)return;
  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
- if(A[edAi])A[edAi][2]=A[edAi][2].filter(function(x){return x!==""});
+ if(A[edAi]){A[edAi][2]=A[edAi][2].filter(function(x){return x!==""});A[edAi][1]=A[edAi][1].filter(function(x){return x!==""})}
  if(edFresh){var fa=A[edAi];if(fa&&fa[0]==="Nueva tarjeta"&&!fa[1].length&&!fa[2].length){A.pop();if(ST.getItem("areas-data")!==null)saveA()}edFresh=false}
  edOpen=false;
  edV.classList.remove("on");document.body.classList.remove("lock");
@@ -1111,7 +1111,7 @@ function remapAreaDel(ai){
 edName.addEventListener("input",function(){
  if(edName.value.trim()!=="")return;
  var a=A[edAi];
- if(!a||a[1].length||a[2].some(function(x){return x!==""}))return;
+ if(!a||a[1].some(function(x){return x!==""})||a[2].some(function(x){return x!==""}))return;
  var ai=edAi;
  A.splice(ai,1);remapAreaDel(ai);saveA();
  edAi=-1;edFresh=false;
@@ -1149,10 +1149,17 @@ edL.addEventListener("change",function(e){
  ask('¿Guardar el cambio?',apply,{yes:"Guardar",no:function(){ta.value=old;grow(ta)}})});
 edL.addEventListener("focusout",function(e){
  var ta=e.target;if(ta.tagName!=="TEXTAREA")return;
- var r=ta.closest(".edr");if(!r||r.getAttribute("data-t")!=="p")return;
- var j=+r.getAttribute("data-j"),a=A[edAi];
- if(a&&a[2][j]===""&&!ta.value.trim()){a[2].splice(j,1);r.remove()}});
+ var r=ta.closest(".edr");if(!r)return;
+ var t=r.getAttribute("data-t"),j=+r.getAttribute("data-j"),a=A[edAi];
+ if(a&&(t==="c"?a[1]:a[2])[j]===""&&!ta.value.trim()){(t==="c"?a[1]:a[2]).splice(j,1);r.remove()}});
 edL.addEventListener("click",function(e){
+ if(e.target.closest(".edpc")){
+  var a=A[edAi];
+  if(a[1].indexOf("")<0)a[1].push("");
+  renderEd();
+  var tl=edL.querySelectorAll('.edr[data-t="c"] textarea'),ta=tl[a[1].indexOf("")];
+  if(ta){try{ta.scrollIntoView({block:"center"})}catch(x){}ta.focus()}
+  return}
  if(e.target.closest(".edp1")){
   var a=A[edAi];
   if(a[2].indexOf("")<0)a[2].push("");
