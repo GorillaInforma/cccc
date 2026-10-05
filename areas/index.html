@@ -158,6 +158,40 @@ body{background:#fff}
 #instB{border:0;background:var(--acc);color:#fff;font:inherit;font-weight:700;border-radius:14px;padding:13px 34px;cursor:pointer;box-shadow:0 8px 16px -4px rgba(31,95,139,.45)}
 #instB:active{transform:translateY(1px)}
 </style>
+<style>
+#toast{z-index:70}
+#edV{position:fixed;left:0;right:0;top:0;bottom:0;z-index:45;background:#fff;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 12px calc(env(safe-area-inset-bottom,0px) + 28px)}
+#edV.on{display:block}
+.edh{position:sticky;top:0;z-index:2;background:#fff;display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 10px) 0 10px;border-bottom:1px solid #e8eff6}
+#edBack{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid #d5e1ee;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 4px 10px rgba(90,140,200,.18)}
+#edName{flex:1;min-width:0;font:inherit;font-size:1.25rem;font-weight:700;color:var(--ink);border:1px solid #d5e1ee;border-radius:12px;padding:8px 12px;background:#fff}
+.eda{margin:14px 0 6px;padding:12px;border:1px solid #edf2f8;border-radius:16px;box-shadow:0 2px 4px rgba(90,140,200,.10),0 10px 20px -8px rgba(90,140,200,.22)}
+.eda label,#edL h3{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;color:var(--acc);font-weight:700;margin:0 0 6px}
+#edL h3{margin:18px 2px 2px}
+#edNew{width:100%;font:inherit;font-size:16px;border:1px solid #d5e1ee;border-radius:10px;padding:9px 10px;background:#fff;color:var(--ink)}
+.eda .row2{display:flex;gap:8px;align-items:center;margin-top:8px}
+.seg{flex:1;display:flex;border:1px solid #d5e1ee;border-radius:10px;overflow:hidden}
+.seg button{flex:1;border:0;background:#fff;color:var(--mute);font:inherit;font-size:13px;font-weight:600;padding:9px 6px;cursor:pointer}
+.seg button.on{background:var(--acc);color:#fff}
+#edAdd{flex:none;border:0;background:#1f7a62;color:#fff;font:inherit;font-weight:700;border-radius:10px;padding:9px 16px;cursor:pointer}
+.edr{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-top:1px solid #edf1f4}
+.edk{flex:none;width:22px;height:40px;display:flex;align-items:center;justify-content:center}
+.edr textarea{flex:1;min-width:0;border:1px solid #e1eaf4;border-radius:10px;padding:8px 10px;font:inherit;font-size:16px;line-height:1.3;resize:none;overflow:hidden;color:var(--ink);background:#fff}
+.edd{flex:none;width:40px;height:40px;border:1px solid #f3d2d5;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+.edempty{text-align:center;color:var(--mute);padding:36px 10px}
+#cfm{position:fixed;left:0;right:0;top:0;bottom:0;z-index:60;background:rgba(29,39,51,.35);display:none;align-items:center;justify-content:center;padding:18px}
+#cfm.on{display:flex}
+#cfm .cbox{width:100%;max-width:340px;background:#fff;border-radius:20px;padding:18px;box-shadow:0 24px 50px -12px rgba(70,140,210,.45)}
+#cfm p{margin:0 0 16px;font-size:1rem;color:var(--ink);word-break:break-word}
+#cfm .row2{display:flex;gap:8px}
+#cfm button{flex:1;border:1px solid #d5e1ee;background:#fff;color:var(--ink);font:inherit;font-weight:600;border-radius:10px;padding:10px;cursor:pointer}
+#cfm button.del{background:#e0212f;border-color:#e0212f;color:#fff}
+</style>
+<style>
+.addc{background:#fff;border:2px dashed #bcd6ee;border-radius:20px;display:flex;align-items:center;justify-content:center;color:var(--acc);cursor:pointer;min-height:0;-webkit-user-select:none;user-select:none;transition:transform .2s ease,background .2s ease}
+.addc:active{transform:scale(.98);background:#f3f8fd}
+.addc svg{width:48px;height:48px}
+</style>
 </head>
 <body>
 <h2 id="todosT">Todos</h2>
@@ -166,6 +200,10 @@ body{background:#fff}
 <section id="histV"><h2>Historial</h2><div id="histL"></div><div id="histE"><svg viewBox="0 0 24 24" width="52" height="52" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>Aún no hay historial</b>Aquí aparecerán los días en que elegiste puntos para Hoy.</div></section>
 <section id="instV"><h2>Instalar app</h2><img src="icon-192.png" alt=""><p>Instala Áreas en tu pantalla de inicio para abrirla como una app, incluso sin internet.</p><button type="button" id="instB">Instalar</button></section>
 <nav id="nav"><button type="button" class="on" data-v="todos"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Todos</button><button type="button" data-v="hoy"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>Hoy<span class="bdg" id="hoyN">0</span></button><button type="button" data-v="hist"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</button><button type="button" data-v="inst" id="navInst" style="display:none"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Instalar</button></nav>
+<div id="edV"><div class="edh"><button type="button" id="edBack" aria-label="Volver"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><input id="edName" maxlength="40" autocomplete="off" aria-label="Nombre de la tarjeta"></div>
+<div class="eda"><label>Agregar punto</label><input id="edNew" placeholder="Escribe el punto" autocomplete="off"><div class="row2"><div class="seg"><button type="button" data-t="c" class="on">Con casilla</button><button type="button" data-t="p">Sin casilla</button></div><button type="button" id="edAdd">Agregar</button></div></div>
+<div id="edL"></div></div>
+<div id="cfm"><div class="cbox"><p id="cfmT"></p><div class="row2"><button type="button" id="cfmN">Cancelar</button><button type="button" id="cfmY" class="del">Eliminar</button></div></div></div>
 <div id="toast"></div>
 <div id="bigsm"><svg viewBox="0 0 120 120" width="160" height="160"><circle cx="60" cy="60" r="56" fill="#1f5f8b"/><circle cx="42" cy="48" r="6.5" fill="#fff"/><circle cx="78" cy="48" r="6.5" fill="#fff"/><path d="M36 70Q60 98 84 70" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg></div>
 <div id="bigok"><svg viewBox="0 0 120 120" width="160" height="160"><circle cx="60" cy="60" r="56" fill="#1f7a62"/><path d="M34 62l18 18 34-40" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -199,6 +237,7 @@ var A=[
  [],
  ["Gorra","Tatuajes","Carita fina","Musculitos","Seguridad","Delgaditos del c","Hombrudos","Pelos barba etc","Bíceps y tríceps","Caritas chiquitas","El culoncito","Lentes altos combinados","Sudadera","Que tiene compas más grandes que aparenta más edad","Que hay mucho toqueteo mucha química","Que se juntan y pueden convivir tranqui","Además también estaban guapos todos"]]
 ];
+var A0=JSON.parse(JSON.stringify(A));
 var KEY="areas-v3",HK="areas-hoy2",S={},UID=[],AREA=[],BY={},KEYS={};
 try{S=JSON.parse(ST.getItem(KEY)||"{}")}catch(e){S={}}
 function saveS(){try{ST.setItem(KEY,JSON.stringify(S))}catch(x){}}
@@ -215,7 +254,9 @@ function setPicks(p){try{ST.setItem(HK,JSON.stringify({d:today(),p:p}))}catch(x)
 function row(t,n,first,k){
  var u=BY[t];
  return '<div class="item'+(first?" first":"")+(S[t]?" dn":"")+'" data-k="'+k+'">'+num(n)+'<input type="checkbox" data-u="'+u+'"'+(S[t]?" checked":"")+'><span class="t">'+esc(t)+'</span></div>'}
-var h="";
+var m=document.getElementById("m");
+function build(){
+var h="";UID=[];AREA=[];BY={};KEYS={};
 A.forEach(function(a,ai){a[1].forEach(function(t,j){BY[t]=UID.length;UID.push(t);AREA.push(a[0]);KEYS["c"+ai+"_"+j]=1});a[2].forEach(function(t,j){KEYS["p"+ai+"_"+j]=1})});
 A.forEach(function(a,ai){
  var N=a[1].length+a[2].length,n=0;
@@ -223,8 +264,9 @@ A.forEach(function(a,ai){
  a[2].forEach(function(t,j){n++;h+='<div class="p" data-k="p'+ai+'_'+j+'">'+num(n)+'<span class="t">'+esc(t)+'</span></div>'});
  a[1].forEach(function(t,j){n++;h+=row(t,n,j===0&&a[2].length,"c"+ai+"_"+j)});
  h+='</div></section>'});
-var m=document.getElementById("m");
-m.innerHTML=h;
+h+='<div class="addc" id="addC" role="button" aria-label="Agregar tarjeta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>';
+ m.innerHTML=h}
+build();
 function fit(root){
  var base=root.classList&&root.classList.contains("open")?17:(window.innerWidth<600?13:14),MIN=10;
  function ok(el){return el.scrollHeight<=el.clientHeight+1}
@@ -401,7 +443,14 @@ function lpStart(e,touch){
  if(!touch&&Date.now()-lastTouch<800)return;
  if(touch)lastTouch=Date.now();
  lpF=false;
- var it=e.target.closest&&e.target.closest(".item,.p");if(!it)return;
+ var it=e.target.closest&&e.target.closest(".item,.p");
+ if(!it){
+  var ar=e.target.closest&&e.target.closest("#m .area");
+  if(!ar||e.target.closest(".x"))return;
+  var p0=touch?e.touches[0]:e;lpX=p0.clientX;lpY=p0.clientY;
+  clearTimeout(lpT);lpClr();
+  lpT=setTimeout(function(){lpT=null;lpF=true;try{navigator.vibrate&&navigator.vibrate(55)}catch(x){}openEditor([].indexOf.call(m.children,ar))},700);
+  return}
  /* desde Todos solo se agrega; quitar solo se puede desde Hoy */
  if(!it.closest("#hoyL")&&getPicks().indexOf(it.getAttribute("data-k"))>=0)return;
  var pt=touch?e.touches[0]:e;lpX=pt.clientX;lpY=pt.clientY;
@@ -425,8 +474,8 @@ document.addEventListener("touchcancel",function(){lpCancel(true)});
 document.addEventListener("mousedown",function(e){lpStart(e,false)});
 document.addEventListener("mousemove",function(e){lpMove(e,false)});
 document.addEventListener("mouseup",function(){lpCancel(false)});
-document.addEventListener("selectstart",function(e){if(e.target.closest&&e.target.closest(".item,.p"))e.preventDefault()});
-document.addEventListener("contextmenu",function(e){if(e.target.closest&&e.target.closest(".item,.p"))e.preventDefault()});
+document.addEventListener("selectstart",function(e){if(e.target.closest&&e.target.closest(".item,.p,#m .area"))e.preventDefault()});
+document.addEventListener("contextmenu",function(e){if(e.target.closest&&e.target.closest(".item,.p,#m .area"))e.preventDefault()});
 document.addEventListener("click",function(e){if(lpF){lpF=false;e.preventDefault();e.stopPropagation()}},true);
 document.getElementById("hoyL").addEventListener("click",function(e){
  if(e.target.tagName==="INPUT")return;
@@ -474,6 +523,7 @@ hl.addEventListener("pointercancel",function(e){swEnd(e,true)});
 document.addEventListener("scroll",function(){if(lpT!==null)lpCancel(false)},{capture:true,passive:true});
 m.addEventListener("click",function(e){
  if(e.target.tagName==="INPUT")return;
+ if(e.target.closest(".addc")){addArea();return}
  if(e.target.closest(".x")){closeCard();return}
  var c=e.target.closest(".area");
  if(c){if(c.classList.contains("open"))closeCard();else openCard(c)}});
@@ -486,6 +536,107 @@ window.addEventListener("popstate",function(){
  closeCard(true)});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){closeCard()}});
 document.addEventListener("visibilitychange",function(){if(!document.hidden)renderHoy()});
+/* ===== Editor de tarjeta ===== */
+var edOpen=false,edFresh=false,edAi=0,edType="c",skipEd=false;
+var edV=document.getElementById("edV"),edL=document.getElementById("edL"),edName=document.getElementById("edName"),edNew=document.getElementById("edNew");
+var IC='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#1f7a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12l3 3 5-6"/></svg>';
+var IP='<svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="3.5" fill="#6a7786"/></svg>';
+var TR='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#e0212f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>';
+function saveA(){ST.setItem("areas-data",JSON.stringify(A))}
+function refreshAll(){closeCard();build();updPies();fit(m);renderHoy();if(view==="hist")renderHist()}
+function reloadData(){
+ try{S=JSON.parse(ST.getItem(KEY)||"{}")}catch(e){S={}}
+ var sa=null;try{sa=JSON.parse(ST.getItem("areas-data")||"null")}catch(e){}
+ A=(Array.isArray(sa)&&sa.length)?sa:JSON.parse(JSON.stringify(A0));
+ if(edOpen)return;
+ refreshAll()}
+function readJ(k){try{return JSON.parse(ST.getItem(k)||"{}")||{}}catch(e){return {}}}
+function remapDel(type,ai,j){
+ function f(k){var q=/^([cp])(\d+)_(\d+)$/.exec(k);if(!q||q[1]!==type||+q[2]!==ai)return k;var n=+q[3];if(n===j)return null;return n>j?type+ai+"_"+(n-1):k}
+ function g(a){return Array.isArray(a)?a.map(f).filter(function(x){return x!==null}):a}
+ var o=readJ(HK);if(o.p){o.p=g(o.p);ST.setItem(HK,JSON.stringify(o))}
+ o=readJ(PK);if(o.k){o.k=g(o.k);ST.setItem(PK,JSON.stringify(o))}
+ var H=getH();
+ Object.keys(H).forEach(function(d){var x=H[d];x.p=g(x.p||[]);x.d=g(x.d||[]);x.pd=g(x.pd||[]);if(!x.p.length)delete H[d]});
+ saveH(H)}
+function dupC(t,ai,j){
+ for(var i=0;i<A.length;i++)for(var k=0;k<A[i][1].length;k++){if(i===ai&&k===j)continue;if(A[i][1][k]===t)return true}
+ return false}
+function grow(el){el.style.height="auto";el.style.height=el.scrollHeight+"px"}
+function renderEd(){
+ var a=A[edAi];
+ function rows(list,type,title){
+  if(!list.length)return "";
+  var r="<h3>"+title+"</h3>";
+  list.forEach(function(t,j){r+='<div class="edr" data-t="'+type+'" data-j="'+j+'"><span class="edk">'+(type==="c"?IC:IP)+'</span><textarea rows="1" spellcheck="false">'+esc(t)+'</textarea><button type="button" class="edd" aria-label="Eliminar">'+TR+'</button></div>'});
+  return r}
+ var html=rows(a[2],"p","Sin casilla")+rows(a[1],"c","Con casilla");
+ edL.innerHTML=html||'<div class="edempty">Sin puntos todavía</div>';
+ edL.querySelectorAll("textarea").forEach(grow)}
+function addArea(){
+ A.push(["Nueva tarjeta",[],[]]);
+ openEditor(A.length-1);edFresh=true;
+ try{edName.focus();edName.select()}catch(x){}}
+function setSeg(){document.querySelectorAll(".seg button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-t")===edType)})}
+function openEditor(ai){
+ if(ai<0||!A[ai])return;
+ closeCard();edAi=ai;edOpen=true;edFresh=false;edType="c";setSeg();
+ edName.value=A[ai][0];edNew.value="";
+ document.body.classList.add("lock");edV.classList.add("on");edV.scrollTop=0;
+ renderEd();
+ try{history.pushState({ed:1},"")}catch(x){}}
+function closeEditor(fromPop){
+ if(!edOpen)return;
+ if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+ if(edFresh){var fa=A[edAi];if(fa&&fa[0]==="Nueva tarjeta"&&!fa[1].length&&!fa[2].length){A.pop();if(ST.getItem("areas-data")!==null)saveA()}edFresh=false}
+ edOpen=false;
+ edV.classList.remove("on");document.body.classList.remove("lock");
+ refreshAll();
+ if(!fromPop&&history.state&&history.state.ed){skipEd=true;try{history.back()}catch(x){}}}
+var cfmCb=null;
+function ask(msg,cb){document.getElementById("cfmT").textContent=msg;cfmCb=cb;document.getElementById("cfm").classList.add("on")}
+function cfmHide(){document.getElementById("cfm").classList.remove("on")}
+document.getElementById("cfmN").addEventListener("click",function(){cfmCb=null;cfmHide()});
+document.getElementById("cfmY").addEventListener("click",function(){var f=cfmCb;cfmCb=null;cfmHide();if(f)f()});
+document.getElementById("cfm").addEventListener("click",function(e){if(e.target.id==="cfm"){cfmCb=null;cfmHide()}});
+document.getElementById("edBack").addEventListener("click",function(){closeEditor(false)});
+window.addEventListener("popstate",function(){if(skipEd){skipEd=false;return}if(edOpen)closeEditor(true)});
+edName.addEventListener("change",function(){
+ var v=edName.value.replace(/\s+/g," ").trim();
+ if(!v){edName.value=A[edAi][0];return}
+ A[edAi][0]=v;edName.value=v;saveA()});
+edName.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();edName.blur()}});
+document.querySelectorAll(".seg button").forEach(function(b){b.addEventListener("click",function(){edType=b.getAttribute("data-t");setSeg()})});
+function addPt(){
+ var v=edNew.value.replace(/\s+/g," ").trim();if(!v)return;
+ var a=A[edAi];
+ if(edType==="c"){
+  if(dupC(v,-1,-1)){toast("Ya existe ese punto");return}
+  delete S[v];saveS();a[1].push(v)
+ }else a[2].push(v);
+ saveA();edNew.value="";renderEd();toast("Punto agregado")}
+document.getElementById("edAdd").addEventListener("click",addPt);
+edNew.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();addPt()}});
+edL.addEventListener("input",function(e){if(e.target.tagName==="TEXTAREA")grow(e.target)});
+edL.addEventListener("keydown",function(e){if(e.target.tagName==="TEXTAREA"&&e.key==="Enter"){e.preventDefault();e.target.blur()}});
+edL.addEventListener("change",function(e){
+ var ta=e.target;if(ta.tagName!=="TEXTAREA")return;
+ var r=ta.closest(".edr"),t=r.getAttribute("data-t"),j=+r.getAttribute("data-j"),a=A[edAi],list=t==="c"?a[1]:a[2],old=list[j],nv=ta.value.replace(/\s+/g," ").trim();
+ if(!nv){ta.value=old;grow(ta);toast("El punto no puede estar vacío");return}
+ if(nv===old){ta.value=old;grow(ta);return}
+ if(t==="c"){
+  if(dupC(nv,edAi,j)){ta.value=old;grow(ta);toast("Ya existe ese punto");return}
+  if(S[old])S[nv]=1;else delete S[nv];
+  delete S[old];saveS()}
+ list[j]=nv;ta.value=nv;grow(ta);saveA()});
+edL.addEventListener("click",function(e){
+ var d=e.target.closest(".edd");if(!d)return;
+ var r=d.closest(".edr"),t=r.getAttribute("data-t"),j=+r.getAttribute("data-j"),ai=edAi,txt=(t==="c"?A[ai][1]:A[ai][2])[j];
+ ask('¿Eliminar "'+txt+'"?',function(){
+  var a=A[ai];
+  if(t==="c"){var tx=a[1][j];a[1].splice(j,1);delete S[tx];saveS()}else a[2].splice(j,1);
+  remapDel(t,ai,j);saveA();renderEd();toast("Punto eliminado")})});
+
 </script>
 <script>
 /* ===== Instalación PWA y service worker ===== */
@@ -533,12 +684,7 @@ function push(){
  setDoc(ref,{d:JSON.stringify(ST.d),t:lastT}).catch(()=>{})}
 function apply(r){
  let o={};try{o=JSON.parse(r.d)||{}}catch(e){return}
- ST.d=o;
- try{S=JSON.parse(ST.getItem("areas-v3")||"{}")}catch(e){S={}}
- document.querySelectorAll("input[data-u]").forEach(i=>{
-  const on=!!S[UID[i.getAttribute("data-u")]];i.checked=on;
-  const it=i.closest(".item");if(it)it.classList.toggle("dn",on)});
- updPies();renderHoy();if(view==="hist")renderHist()}
+ ST.d=o;reloadData()}
 try{
  const [A,F]=await Promise.all([
   import("https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js"),
